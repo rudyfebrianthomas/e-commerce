@@ -1,0 +1,37 @@
+{
+  "name": "e-commerce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "NODE_ENV='test' npx mocha --reporter nyan --exit",
+    "start": "NODE_ENV='production'node app.js",
+    "dev": "NODE_ENV='development' nodemon app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rudyfebrianthomas/e-commerce.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/rudyfebrianthomas/e-commerce/issues"
+  },
+  "homepage": "https://github.com/rudyfebrianthomas/e-commerce#readme",
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "chai-http": "^4.3.0",
+    "dotenv": "^8.0.0",
+    "mocha": "^6.1.4"
+  },
+  "dependencies": {
+    "bcrypt": "^3.0.6",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "google-auth-library": "^4.2.2",
+    "google-cloud-storage": "^2.0.2",
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.6.0"
+  }
+}
