@@ -18,11 +18,6 @@ describe('Product Routes', function () {
                     .then(function (res) {
                         expect(res).to.have.status(200)
                         expect(res.body).to.be.an('array')
-                        // expect(res.body).to.have.property(_id)
-                        // expect(res.body).to.have.property(name)
-                        // expect(res.body).to.have.property(price)
-                        // expect(res.body).to.have.property(description)
-                        // expect(res.body).to.have.property(stock)
                         done()
                     })
                     .catch(function (err) {
