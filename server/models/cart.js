@@ -7,10 +7,10 @@ let cart = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'User'
     },
-    cartitemId: {
+    cartitemId: [{
         type: Schema.Types.ObjectId,
-        ref: 'Product'
-    },
+        ref: 'CartItem'
+    }],
     status: {
         type: String
     }

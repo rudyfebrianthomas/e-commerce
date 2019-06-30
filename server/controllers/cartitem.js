@@ -1,18 +1,17 @@
-const Cart = require('../models/cart')
+const CartItem = require('../models/cartItem')
 
-class ControllerCart {
+class ControllerCartItem {
     static findAll(req, res, next) {
-        Cart
+        CartItem
             .find({})
-            .populate('userId')
-            .populate('cartitemId')
+            .populate('productId')
             .then(resp => {
                 if (resp.length !== 0) {
                     res.status(200).json(resp)
                 } else {
                     throw ({
                         status: 404,
-                        message: 'Cart not found'
+                        message: 'Cart item not found'
                     })
                 }
             })
@@ -21,17 +20,16 @@ class ControllerCart {
             })
     }
     static findOne(req, res, next) {
-        Cart
+        CartItem
             .findById(req.params.id)
-            .populate('userId')
-            .populate('cartitemId')
+            .populate('productId')
             .then(resp => {
                 if (resp) {
                     res.status(200).json(resp)
                 } else {
                     throw ({
                         status: 404,
-                        message: 'Cart not found'
+                        message: 'Cart item not found'
                     })
                 }
             })
@@ -41,19 +39,22 @@ class ControllerCart {
     }
     static create(req, res, next) {
         let data = {
-            userId: req.decoded.id,
-            cartitemId: [],
-            status: 'open'
+            productId: req.body.productId,
+            quantity: req.body.quantity,
+            totalPrice: 1,
+            cartId: req.body.cartId,
         }
-        Cart.findOne({
-                userId: req.decoded.id,
-                status: 'open'
+        CartItem.findOne({
+                productId: req.body.productId,
+                cartId: req.body.cartId
             })
             .then(resp => {
                 if (resp) {
+                    resp.quantity = resp.quantity + Number(req.body.quantity)
+                    resp.save()
                     res.status(200).json(resp)
                 } else {
-                    return Cart.create(data)
+                    return CartItem.create(data)
                 }
             })
             .then(resp => {
@@ -63,12 +64,15 @@ class ControllerCart {
                 next(err)
             })
     }
+
     static patch(req, res, next) {
         let data = {
-            status: req.body.status
+            quantity: req.body.quantity,
         }
-        Cart
-            .findByIdAndUpdate(req.params.id, data,{new: true})
+        CartItem
+            .findOneAndUpdate({
+                _id: req.params.id
+            }, data)
             .then(resp => {
                 res.status(200).json(resp)
             })
@@ -77,7 +81,7 @@ class ControllerCart {
             })
     }
     static delete(req, res, next) {
-        Cart
+        CartItem
             .findByIdAndDelete(req.params.id)
             .then(resp => {
                 res.status(200).json(resp)
@@ -88,4 +92,4 @@ class ControllerCart {
     }
 }
 
-module.exports = ControllerCart
+module.exports = ControllerCartItem

@@ -13,7 +13,7 @@ module.exports = (req, res, next) => {
                 } else {
                     throw({
                         status: 401,
-                        msg: "Unauthorized"
+                        message: "Unauthorized"
                     })
                 }
             })
@@ -21,7 +21,7 @@ module.exports = (req, res, next) => {
     } else {
         throw({
             status: 401,
-            msg: 'You have to login first'
+            message: 'You have to login first'
         })
     }
 }

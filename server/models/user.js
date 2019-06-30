@@ -51,7 +51,7 @@ let user = new Schema({
   },
   role: {
     type: String,
-    default: "pembeli"
+    default: "customer"
   }
 }, {
   timestamps: true
