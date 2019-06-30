@@ -1,7 +1,9 @@
 <template>
   <div class="home">
     <div class="section">
-    <Card class="column is-2"></Card>
+    <div v-for="(prod, index) in prods" :key="index" >
+      <Card class="column is-2" :prod="prod"></Card>
+    </div>
     </div>
   </div>
 </template>
@@ -13,6 +15,11 @@ export default {
   data() {
     return {
       
+    }
+  },
+  computed: {
+    prods(){
+      return this.$store.state.products
     }
   },
   components: {
