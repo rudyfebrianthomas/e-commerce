@@ -20,7 +20,8 @@ let product = new Schema({
         required: [true, 'Description cannot be empty']
     },
     image: {
-        type: String
+        type: String,
+        required: [true, 'Image cannot be empty']
     },
     ownerId: {
         type: Schema.Types.ObjectId,

@@ -1,7 +1,5 @@
 const mongoose = require('mongoose')
-const {
-  encrypt
-} = require('../helpers/bcrypt')
+const {encrypt} = require('../helpers/bcrypt')
 
 let Schema = mongoose.Schema
 
