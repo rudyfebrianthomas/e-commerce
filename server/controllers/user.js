@@ -4,52 +4,19 @@ const {decrypt} = require('../helpers/bcrypt')
 const {OAuth2Client} = require('google-auth-library');
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID);
 
-class ControllerUser {
+class Controller {
     static register(req, res, next) {
         let data = {
             userName: req.body.userName,
             email: req.body.email,
-            password: req.body.password
+            password: req.body.password,
+            role: req.body.role
         }
-        User
-            .findOne({
-                email: req.body.email
-            })
-            .then(resp => {
-                if (!resp) {
-                    return User.create(data)
-                } else {
-                    throw ({
-                        status: 400,
-                        message: "Email already used"
-                    })
-                }
-            })
-            .then(resp => {
-                res.status(201).json(resp)
-            })
-            .catch(err => {
-                if(err.errors){
-                    if(err.errors.userName){
-                        next({
-                            status: 400,
-                            message: err.errors.userName.message
-                        })
-                    }else if(err.errors.email){
-                        next({
-                            status: 400,
-                            message: err.errors.email.message
-                        })
-                    }else if(err.errors.password){
-                        next({
-                            status: 400,
-                            message: err.errors.password.message
-                        })
-                    }
-                }else{
-                    next(err)
-                }
-            })
+        User.create(data).
+        then(resp => {
+            res.status(201).json(resp)
+        })
+        .catch(next)
     }
 
     static login(req, res, next) {
@@ -63,13 +30,12 @@ class ControllerUser {
                         let payload = {
                             id: resp._id,
                             userName: resp.userName,
-                            email: resp.email
+                            email: resp.email,
+                            role: resp.role
                         }
                         let token = sign(payload)
                         res.status(200).json({
-                            token,
-                            userName: resp.userName,
-                            email: resp.email
+                            token
                         })
                     } else {
                         throw ({
@@ -84,23 +50,7 @@ class ControllerUser {
                     })
                 }
             })
-            .catch(err => {
-                if(err.errors){
-                    if(err.errors.email){
-                        next({
-                            status: 400,
-                            message: err.errors.email.message
-                        })
-                    }else if(err.errors.password){
-                        next({
-                            status: 400,
-                            message: err.errors.password.message
-                        })
-                    }
-                }else{
-                    next(err)
-                }
-            })
+            .catch(next)
     }
 
     static googlesignin(req, res, next) {
@@ -138,13 +88,12 @@ class ControllerUser {
                     } else {
                         throw ({
                             status: 400,
-                            message: "Email/Password Wrong, Try Again"
+                            message: "Email/Password wrong"
                         })
                     }
                 } else {
                     return User
                         .create(data)
-
                 }
             })
             .then(resp => {
@@ -162,4 +111,4 @@ class ControllerUser {
     }
 }
 
-module.exports = ControllerUser
+module.exports = Controller

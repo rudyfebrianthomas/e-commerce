@@ -9,35 +9,30 @@
 
 <script>
 import Navbar from "./components/Navbar";
-import ax from "./api";
 export default {
   name: "app",
   components: {
     Navbar
   },
   mounted() {
-    ax.get("/products", { headers: { token: localStorage.token } })
-    .then(({data}) => {
-      console.log(data)
-      this.$store.commit('getproducts', data)
-    })
-    .catch((err) => {
-      console.log(err)
-    })
+    this.$store.dispatch('GETALLPRODUCTS')
   }
 };
 </script>
 
 <style>
 #app {
+  min-height: 100vh;
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  background-image: url("./assets/blue.png");
   background-size: cover;
-  min-height: 100vh;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  background-position: center;
+  background-image: url("./assets/blue.png");
 }
 #nav {
   padding: 30px;

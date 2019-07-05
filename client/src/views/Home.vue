@@ -1,29 +1,23 @@
 <template>
-  <div class="home">
-    <div class="section">
-    <div v-for="(prod, index) in prods" :key="index" >
-      <Card class="column is-2" :prod="prod"></Card>
-    </div>
+  <div class="container">
+    <div class="columns is-multiple">
+      <div v-for="(item, index) in 10" :key="index" class="column is-3">
+        <Product></Product>
+      </div>
     </div>
   </div>
 </template>
 
 <script>
-import Card from '../components/Card'
+import Product from "@/components/Product";
+
 export default {
   name: "home",
   data() {
-    return {
-      
-    }
-  },
-  computed: {
-    prods(){
-      return this.$store.state.products
-    }
+    return {};
   },
   components: {
-    Card
+    Product
   }
 };
 </script>

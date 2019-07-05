@@ -9,7 +9,7 @@ export default new Router({
   routes: [{
       path: '/',
       name: 'home',
-      component: () => import( /* webpackChunkName: "about" */ './views/Home.vue')
+      component: () => import( /* webpackChunkName: "home" */ './views/Home.vue'),
     },
     {
       path: '/about',
@@ -17,20 +17,14 @@ export default new Router({
       component: () => import( /* webpackChunkName: "about" */ './views/About.vue')
     },
     {
-      path: '/form',
-      name: 'form',
-      component: () => import( /* webpackChunkName: "form" */ './views/Form.vue'),
-      children: [{
-          path: 'login',
-          name: 'login',
-          component: () => import( /* webpackChunkName: "login" */ './components/Login.vue'),
-        },
-        {
-          path: 'register',
-          name: 'regis',
-          component: () => import( /* webpackChunkName: "regis" */ './components/Regis.vue'),
-        }
-      ]
+      path: '/login',
+      name: 'login',
+      component: () => import( /* webpackChunkName: "login" */ './views/Login.vue')
+    },
+    {
+      path: '/register',
+      name: 'register',
+      component: () => import( /* webpackChunkName: "register" */ './views/Regis.vue')
     }
   ]
 })
