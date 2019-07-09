@@ -2,14 +2,13 @@
   <div>
     <div class="card">
       <div class="card-image">
-        <figure class="image is-4by3">
-          <img src="https://bulma.io/images/placeholders/1280x960.png" alt="Placeholder image" />
+        <figure class="image is-4by4">
+          <img src="https://cdn.bulbagarden.net/upload/thumb/2/2e/GO_Potion.png/200px-GO_Potion.png" alt="Placeholder image"/>
         </figure>
       </div>
       <div class="card-content">
         <div class="content">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-          Phasellus nec iaculis mauris.
+            Potion
         </div>
       </div>
     </div>
@@ -20,5 +19,8 @@
 export default {};
 </script>
 
-<style>
+<style scoped>
+.card:hover{
+    transform: scale(1.01)
+}
 </style>

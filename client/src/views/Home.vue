@@ -1,23 +1,27 @@
 <template>
-  <div class="container">
-    <div class="columns is-multiple">
-      <div v-for="(item, index) in 10" :key="index" class="column is-3">
-        <Product></Product>
-      </div>
+    <div class="container">
+        <div class="columns is-multiline">
+            <div v-for="(p, i) in 10" :key="i" class="column is-3" @click.prevent="details">
+                <Product></Product>
+            </div>
+        </div>
     </div>
-  </div>
 </template>
 
 <script>
-import Product from "@/components/Product";
-
+import Product from '@/components/Product'
 export default {
-  name: "home",
-  data() {
-    return {};
-  },
-  components: {
+components: {
     Product
-  }
-};
+},
+methods: {
+    details(){
+        this.$router.push('/detail')
+    }
+},
+}
 </script>
+
+<style>
+
+</style>
